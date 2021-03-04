@@ -1,27 +1,81 @@
-$cor-primaria: blue;
-$font-primaria: monospace;
+@mixin title-large {
+  font-size: 4em;
+  font-weight: bold;
+  font-family: monospace;
+  line-height: 1;
+}
+
+//Facilitar o uso de prefixos
+@mixin border-box {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box; //Mozilla
+  -webkit-box-sizing: border-box; //Safaria e Chrome
+}
+
+//Valor default: blue e 100px, quando os mesmos não são passados
+@mixin separator($color: blue, $width: 100px) {
+  &::after {
+    content: '';
+    display: block;
+    width: $width;
+    height: 4px;
+    background: $color;
+  }
+}
+
+//Arguments '...'
+@mixin box-shadow($shadow...) {
+  box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  -webkit-box-shadow: $shadow;
+}
+
+@mixin mobile {
+  //Media query, dispositivo de uso e css customizado
+  @media (max-width: 600px) {
+    //Usando contexto customizado
+    @content;
+  }
+}
+
+$primary-color: blue;
+$primary-font: monospace;
 $gutter: 30px;
 
 section {
   max-width: 600px;
   margin: 0 auto;
+  @include border-box;
 }
 
 .modal {
-  h1.title {
-    color: $cor-primaria;
-    font-family: $font-primaria;
+  @include box-shadow(10px 10px 0 0 rgba(0, 0, 0, .5),
+          15px 15px 0 0 rgba(0, 0, 0, .5),
+          20px 20px 0 0 rgba(0, 0, 0, .5));
+
+  h1 {
+    color: $primary-color;
+    font-family: $primary-font;
     margin-bottom: $gutter;
+    @include title-large;
+    @include separator(yellow, 400px);
+    @include mobile {
+      color: #84E;
+      font-size: 2em;
+    }
   }
 
   p {
     font: {
       size: 1.2em;
-      family: $font-primaria;
+      family: $primary-font;
       style: italic;
     }
     line-height: 1.4;
     max-width: 400px;
+    @include mobile {
+      font-size: .6em;
+    }
   }
 
   a {
@@ -30,11 +84,11 @@ section {
     padding: 10px;
     border-radius: 4px;
     text-align: center;
-    background: $cor-primaria;
+    background: $primary-color;
     color: white;
     text-decoration: none;
     text-transform: uppercase;
-    font-family: $font-primaria;
+    font-family: $primary-font;
   }
 }
 
