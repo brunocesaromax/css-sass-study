@@ -1,44 +1,30 @@
-//Distância entre colunas
-$gutter: 20px;
-
 div {
-  $width: 400px;
-  font-size: $width - 2 * $gutter;
-  padding: $gutter;
-  height: $width / 2;
-  background: #333 + #777;
+  $width: 600px;
+  width: $width;
+
+  @if $width > 400px{
+    height: $width * 1.5;
+  } @else {
+    height: $width;
+  }
 }
 
-//Placeholder
-%clearfix::after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-div {
-  @extend %clearfix;
-}
-
-section{
-  @extend %clearfix;
-}
-
-.error {
-  color: red;
-  font-weight: bold;
-}
-
-a.error {
-  display: block;
-}
-
-.button-error {
-  //Usar somente quando há somente um uso do seletor no site
-  //preferência pelo mixin
-  @extend .error;
-  padding: 20px;
-  width: 200px;
+//Bom para usar em tipografias (Máx 6)
+@mixin type-1($size) {
+  font-family: monospace;
+  font-weight: normal;
+  @if $size == 16 {
+    font-size: 1em;
+    font-weight: normal;
+  }
+  @else if $size == 18 {
+    font-size: 1.25em;
+    font-weight: normal;
+  }
+  @else if $size == 25 {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
 }
 
 @mixin title-large {
@@ -79,6 +65,94 @@ a.error {
     //Usando contexto customizado
     @content;
   }
+}
+
+@mixin device($d) {
+  @if $d == m {
+    @media (max-width: 300px) {
+      @content;
+    }
+  }
+  @else if $d == t {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+  @else if $d == s {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+}
+
+div {
+  width: 100%;
+  @include device(t) {
+    width: 80%;
+  }
+  @include device(m) {
+    width: 60%;
+  }
+}
+
+$theme: oceano;
+$prim-color: black;
+$secondary-color: gray;
+
+@if $theme == oceano {
+  $prim-color: blue;
+  $secondary-color: orange;
+} @else if $theme == deserto {
+  $prim-color: yellow;
+  $secondary-color: purple;
+}
+
+p {
+  color: $prim-color;
+  background: $secondary-color;
+}
+
+//Distância entre colunas
+$gutter: 20px;
+
+div {
+  $width: 400px;
+  font-size: $width - 2 * $gutter;
+  padding: $gutter;
+  height: $width / 2;
+  background: #333 + #777;
+}
+
+//Placeholder
+%clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+div {
+  @extend %clearfix;
+}
+
+section {
+  @extend %clearfix;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+a.error {
+  display: block;
+}
+
+.button-error {
+  //Usar somente quando há somente um uso do seletor no site
+  //preferência pelo mixin
+  @extend .error;
+  padding: 20px;
+  width: 200px;
 }
 
 $primary-color: blue;
