@@ -1,3 +1,14 @@
+//Distância entre colunas
+$gutter: 20px;
+
+div {
+  $width: 400px;
+  font-size: $width - 2 * $gutter;
+  padding: $gutter;
+  height: $width / 2;
+  background: #333 + #777;
+}
+
 //Placeholder
 %clearfix::after {
   content: '';
