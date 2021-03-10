@@ -1,0 +1,38 @@
+//Loop EACH
+$list: facebook twitter instagram snapchat;
+
+@each $item in $list {
+  .rede-#{$item} {
+    background: url('../img/#{$item}.png');
+  }
+}
+
+//Loop WHILE
+$number: 1;
+
+@while $number <= 6 {
+  .type-#{$number} {
+    font-size: 16 * $number + px;
+  }
+  $number: $number + 1;
+}
+
+//Loop FOR
+$container: 768;
+$cols: 12;
+$gutter: 20; //Distância entre colunas
+
+@for $i from 1 through 12 {
+  $width: percentage(1 / $i);
+  .percent-#{$i} {
+    width: $width;
+  }
+}
+
+//Utilizado para criar o próprio grid
+@for $i from 1 through 12 {
+  $width: $container / $cols * $i - $gutter;
+  .grid-#{$i} {
+    width: $width + px;
+  }
+}
