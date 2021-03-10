@@ -1,4 +1,8 @@
 div {
+  width: 33%;
+}
+
+div {
   width: 600px;
   height: 900px;
 }
@@ -124,6 +128,7 @@ ul {
 ul li {
   display: inline-block;
   list-style: none;
+  font-size: 2.25em;
 }
 
 ul li a {
@@ -132,8 +137,9 @@ ul li a {
   text-decoration: none;
   background: blue;
   color: white;
+  font-size: 0.44444em;
 }
 
 ul li a:hover, ul li a.active {
-  background: pink;
+  background: rgba(0, 0, 255, 0.5);
 }
